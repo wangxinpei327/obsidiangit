@@ -55,9 +55,9 @@ Before committing to building an agent, validate that your use case can meet the
 
 In its most fundamental form, an agent consists of three core components:
 
-1. **Model** The LLM powering the agent’s reasoning and decision-making.
-2. **Tools** External functions or APIs the agent can use to take action.
-3. **Instructions** Explicit guidelines and guardrails defining how the agent behaves.
+1. ==**Model** The LLM powering the agent’s reasoning and decision-making.==
+2. ==**Tools** External functions or APIs the agent can use to take action.==
+3. ==**Instructions** Explicit guidelines and guardrails defining how the agent behaves.==
 
 Here’s what this looks like in code when using OpenAI’s Agents SDK. You can also implement the same concepts using your preferred library or building directly from scratch.
 
@@ -95,11 +95,11 @@ Each tool should have a standardized definition, enabling flexible, many-to-many
 
 Broadly speaking, agents need three types of tools:
 
-| Type | Description | Examples |
-| --- | --- | --- |
-| Data | Enable agents to retrieve context and information necessary for executing the workflow. | Query transaction databases or systems like CRMs, read PDF documents, or search the web. |
-| Action | Enable agents to interact with systems to take actions such as adding new information to databases, updating records, or sending messages. | Send emails and texts, update a CRM record, hand-off a customer service ticket to a human. |
-| Orchestration | Agents themselves can serve as tools for other agents—see the Manager Pattern in the Orchestration section. | Refund agent, Research agent, Writing agent. |
+| Type          | Description                                                                                                                                | Examples                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Data          | Enable agents to retrieve context and information necessary for executing the workflow.                                                    | Query transaction databases or systems like CRMs, read PDF documents, or search the web.   |
+| Action        | Enable agents to interact with systems to take actions such as adding new information to databases, updating records, or sending messages. | Send emails and texts, update a CRM record, hand-off a customer service ticket to a human. |
+| Orchestration | Agents themselves can serve as tools for other agents—see the Manager Pattern in the Orchestration section.                                | Refund agent, Research agent, Writing agent.                                               |
 
 For example, here’s how you would equip the agent defined above with a series of tools when using the Agents SDK:
 
