@@ -114,8 +114,13 @@ OOM Killer
 ```
 dmesg -T | grep -i kill
 ```
-~~跳过文档生成阶段：```~~
-~~-Dmaven.javadoc.skip=true~~
-```
-进一步降低xms\xmx
-修改pom.xml中180为     <maven.scaladoc.skip>true</maven.scaladoc.skip>
+跳过文档生成阶段：```
+-Dmaven.javadoc.skip=true
+进一步降低xms\xmx  
+
+修改pom.xml中180为     true
+
+
+## make distribute阶段总卡死
+4G内存不够，修改build/sbt和mvn中的XMX
+
