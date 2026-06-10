@@ -1,8 +1,8 @@
-1、编译spark-tags报错，云服务器内存太小，修改pom.xml中xss\xmx（注意有两个）
+## 编译spark-tags报错，云服务器内存太小，修改pom.xml中xss\xmx（注意有两个）
 
-2、部分包ali maven镜像没有，更换到原生maven 镜像
+## 部分包ali maven镜像没有，更换到原生maven 镜像
 
-3、报错：[ERROR] Failed to execute goal org.apache.maven.plugins:maven-enforcer-plugin:3.6.2:enforce (enforce-versions) on project spark-core_2.13: 
+## 报错：[ERROR] Failed to execute goal org.apache.maven.plugins:maven-enforcer-plugin:3.6.2:enforce (enforce-versions) on project spark-core_2.13: 
 [ERROR] Rule 2: org.apache.maven.enforcer.rules.dependency.BannedDependencies failed with message:
 [ERROR] org.apache.spark:spark-core_2.13:jar:4.1.2
 [ERROR]    org.apache.hadoop:hadoop-aws:jar:3.3.6
@@ -22,7 +22,7 @@ core/pom.xml中添加：513         <exclusion>
 516         </exclusion>
 
 
-4、编译spark connect时报错：[ERROR] /root/spark-4.1.2/sql/connect/common/src/main/protobuf/spark/connect/expressions.proto [0:0]: /root/spark-4.1.2/sql/connect/common/target/protoc-plugins/protoc-gen-grpc-java-1.76.0-linux-x86_64.exe: /lib64/libstdc++.so.6: version `CXXABI_1.3.8' not found 
+## 编译spark connect时报错：[ERROR] /root/spark-4.1.2/sql/connect/common/src/main/protobuf/spark/connect/expressions.proto [0:0]: /root/spark-4.1.2/sql/connect/common/target/protoc-plugins/protoc-gen-grpc-java-1.76.0-linux-x86_64.exe: /lib64/libstdc++.so.6: version `CXXABI_1.3.8' not found 
 (required by /root/spark-4.1.2/sql/connect/common/target/protoc-plugins/protoc-gen-grpc-java-1.76.0-linux-x86_64.exe)
 /root/spark-4.1.2/sql/connect/common/target/protoc-plugins/protoc-gen-grpc-java-1.76.0-linux-x86_64.exe: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by /root/spark-4.1.2/sql/connect/common/target/protoc-plugins/protoc-gen-grpc-java-1.76.0-
 linux-x86_64.exe)
@@ -57,7 +57,7 @@ nux-x86_64.exe)
 ~~升级GCC~~   
 换成ubuntu 22.04系统进行编译
 
-5、换了个ubuntu系统：org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal net.alchim31.maven:scala-maven-plu 
+## 换了个ubuntu系统：org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal net.alchim31.maven:scala-maven-plu 
 gin:4.9.5:doc-jar (attach-scaladocs) on project spark-catalyst_2.13: MavenReportException: Error while creating a
 rchive: wrap: Process exited with an error: 137 (Exit value: 137)                                                
     at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:333)                       
@@ -86,7 +86,7 @@ der.java:53)
     at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
     at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
     at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
-# 137代表什么
+ 137代表什么
 
 Linux 中：
 
@@ -110,7 +110,7 @@ OOM Killer
 
 ---
 
-# 验证方法
+ 验证方法
 ```
 dmesg -T | grep -i kill
 ```
