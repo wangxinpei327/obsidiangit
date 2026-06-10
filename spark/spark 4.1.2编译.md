@@ -56,3 +56,66 @@ nux-x86_64.exe)
 
 ~~升级GCC~~   
 换成ubuntu 22.04系统进行编译
+
+5、换了个ubuntu系统：org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal net.alchim31.maven:scala-maven-plu 
+gin:4.9.5:doc-jar (attach-scaladocs) on project spark-catalyst_2.13: MavenReportException: Error while creating a
+rchive: wrap: Process exited with an error: 137 (Exit value: 137)                                                
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:333)                       
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)                        
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)                          
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)               
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)                        
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)                            
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)     
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)      
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105) 
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuil
+der.java:53)                                                                                                     
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:906)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:283)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:206)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:77)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:569)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
+# 137代表什么
+
+Linux 中：
+
+```
+137 = 128 + 9
+```
+
+即：
+
+```
+SIGKILL (kill -9)
+```
+
+绝大多数情况下意味着：
+
+```
+OOM Killer
+```
+
+把进程杀掉了。
+
+---
+
+# 验证方法
+```
+dmesg -T | grep -i kill
+```
+~~跳过文档生成阶段：```~~
+~~-Dmaven.javadoc.skip=true~~
+```
+进一步降低xms\xmx
+修改pom.xml中180为     <maven.scaladoc.skip>true</maven.scaladoc.skip>
