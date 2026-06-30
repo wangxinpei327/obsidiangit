@@ -52,3 +52,4 @@ CPU调度已经炸了
 3. 200个executor，单executor调整至2core，作业大批量报错，cpu告警
 4. 200个executor，400partition下，开启AQE与不开启差异不大
 5. 降低了io.thread相关参数和maxreqsinfligs到16，提升executor 到500，作业大批量报错
+6. 下一步替换JDK并分别调整executor数量和partitions数量
