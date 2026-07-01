@@ -15,3 +15,7 @@ spark.sql.hive.metastore.version 4.1.0
 GSS initiate failed
 ```
 主要是hive4需要hive.metastore.kerberos.keytab.file和hive.metastore.kerberos.principal
+
+## hive版本切换基本方式：
+放置hive3的hive-site.xml到spark/conf中，建立standalone-metastore文件夹存放hivelib下的jar包，默认链接hive3，通过--conf制定参数的形式，切换到hive4
+![[Pasted image 20260701165530.png]]
