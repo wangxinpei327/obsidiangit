@@ -16,6 +16,13 @@ GSS initiate failed
 ```
 主要是hive4需要hive.metastore.kerberos.keytab.file和hive.metastore.kerberos.principal
 
+
 ## hive版本切换基本方式：
 放置hive3的hive-site.xml到spark/conf中，建立standalone-metastore文件夹存放hivelib下的jar包，默认链接hive3，通过--conf制定参数的形式，切换到hive4
 ![[Pasted image 20260701165530.png]]
+
+
+## 配置KHSC服务
+一开始hive4_catalog看到的databases与hive3的一样，且表也一样。
+后续查询数据报错gss initial错误，发现是配置有问题，如下是正确配置：
+![[7bbe089ba9c2eda97ca5503dcc6a8a44.jpg]]
