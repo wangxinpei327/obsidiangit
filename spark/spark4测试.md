@@ -22,7 +22,10 @@ GSS initiate failed
 ![[Pasted image 20260701165530.png]]
 
 
-## 配置KHSC服务
+## 配置KHSC服务同时支持hive3、hive4
 一开始hive4_catalog看到的databases与hive3的一样，且表也一样。
 后续查询数据报错gss initial错误，发现是配置有问题，如下是正确配置：
 ![[7bbe089ba9c2eda97ca5503dcc6a8a44.jpg]]
+
+
+## 重点测试hive3\hive4\spark4、iceberg、paimon的集成情况
