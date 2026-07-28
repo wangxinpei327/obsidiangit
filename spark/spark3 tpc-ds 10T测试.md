@@ -54,3 +54,8 @@ CPU调度已经炸了
 5. 降低了io.thread相关参数和maxreqsinflights到16，提升executor 到500，作业大批量报错
 6. 下一步替换JDK并分别调整executor数量和partitions数量
 7. 提高core的数量，单executor分32个core
+
+2026.7.27调用iceberg tpcds测试后，提交机器宕机
+怀疑可能是有异常broadcast?
+修改autobroadcast，并且降低driver端内存
+
