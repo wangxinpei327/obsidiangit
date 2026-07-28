@@ -55,7 +55,14 @@ CPU调度已经炸了
 6. 下一步替换JDK并分别调整executor数量和partitions数量
 7. 提高core的数量，单executor分32个core
 
-2026.7.27调用iceberg tpcds测试后，提交机器宕机
-怀疑可能是有异常broadcast?
-修改autobroadcast，并且降低driver端内存
+8. 2026.7.27调用iceberg tpcds测试后，提交机器宕机，怀疑可能是有异常broadcast?
+修改autobroadcast，并且降低driver端内存、关闭该节点nm、dn服务、关闭spark.sql.catalog.iceberg.cache-enabled=false，开启该选项后，Spark Catalog ，会缓存：
+
+- Table Metadata
+- Snapshot
+- Schema
+- Partition Spec
+
+连续大量表访问：
+可能导致，Driver Heap 增长。
 
