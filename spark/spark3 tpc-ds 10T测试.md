@@ -3,51 +3,9 @@
 
 ![[Pasted image 20260618092401.png]]
 ![[Pasted image 20260618092410.png]]
-2. 开启了DRA、ESS，前面的executor可以正常传输kyuubi-spark-sql-engine.jar这个jar包，后面的executor不行。使用spark-sql可以正常启动。
-3. 关闭DRA、ESS后，将executor instance数量限制到500后，kyuubi可以启动。
-4. executor数量调上去之后，或者开了多个并发，也不行，单纯使用spark-sql启动任务也会报错。
-5. 待查vmstat情况：
-最关键指标：
-
-```
-steal time
-```
-
-例如：
-
-```
-st=20%
-```
-
-意味着：
-
-```
-20%时间CPU被宿主机抢走
-```
-
-再看上下文切换
-
-```
-vmstat 1
-```
-
-如果：
-
-```
-cs > 100000
-```
-
-或者：
-
-```
-r >> cpu核数
-```
-
-说明：
-
-```
-CPU调度已经炸了
-```
+- 开启了DRA、ESS，前面的executor可以正常传输kyuubi-spark-sql-engine.jar这个jar包，后面的executor不行。使用spark-sql可以正常启动。
+- 关闭DRA、ESS后，将executor instance数量限制到500后，kyuubi可以启动。
+- executor数量调上去之后，或者开了多个并发，也不行，单纯使用spark-sql启动任务也会报错。
 
 3. 200个executor，单executor调整至2core，作业大批量报错，cpu告警
 4. 200个executor，400partition下，开启AQE与不开启差异不大
@@ -57,12 +15,9 @@ CPU调度已经炸了
 
 8. 2026.7.27调用iceberg tpcds测试后，提交机器宕机，怀疑可能是有异常broadcast?
 修改autobroadcast，并且降低driver端内存、关闭该节点nm、dn服务、关闭spark.sql.catalog.iceberg.cache-enabled=false，开启该选项后，Spark Catalog ，会缓存：
-
 - Table Metadata
 - Snapshot
 - Schema
 - Partition Spec
-
-连续大量表访问：
-可能导致，Driver Heap 增长。
+连续大量表访问，可能导致，Driver Heap 增长。
 
